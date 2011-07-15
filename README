@@ -1,0 +1,26 @@
+
+    __     ______     ______     __   __     ______     __  __     ______  
+   /\ \   /\  ___\   /\  __ \   /\ "-.\ \   /\  __ \   /\ \/\ \   /\__  _\ 
+  _\_\ \  \ \___  \  \ \ \/\ \  \ \ \-.  \  \ \  __ \  \ \ \_\ \  \/_/\ \/ 
+ /\_____\  \/\_____\  \ \_____\  \ \_\\"\_\  \ \_\ \_\  \ \_____\    \ \_\ 
+ \/_____/   \/_____/   \/_____/   \/_/ \/_/   \/_/\/_/   \/_____/     \/_/ 
+
+
+ Just a little utlity I wrote to convert objects to JSON in fewer lines of code.
+ Uses simplejson, and works with Django.
+
+    >>> from jsonaut import to_json
+    >>> 
+    >>> manufacturer = Manufacturer(name='Apple', website='http://www.apple.com')'
+    >>> category = Category(name='Laptops')
+    >>> product = Product(name='MacBook Pro', \
+    >>>                   category=category, \
+    >>>                   manufacturer=manufacturer)
+    >>>
+    >>> json = to_json(product, fields=['name',
+    >>>                                   ('category.name', 'category_name'),
+    >>>                                   {'manufacturer': ['name', 'website']}
+    >>>                                ])
+    {'name': 'MacBook Pro', 'category_name': 'Laptops', 'manufacturer': {'name': 
+    'Apple', 'website': 'http://www.apple.com'}}
+
